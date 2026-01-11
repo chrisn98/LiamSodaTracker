@@ -147,7 +147,7 @@
         }
 
         .warning-section {
-            background: linear-gradient(135deg, #ff5722 0%, #ff7043 100%);
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
             color: white;
         }
 
@@ -168,7 +168,7 @@
             background: rgba(255,255,255,0.1);
             padding: 1.5rem;
             border-radius: 8px;
-            border-left: 4px solid #ffeb3b;
+            border-left: 4px solid #ff6b35;
         }
 
         .health-impacts {
@@ -179,10 +179,11 @@
         }
 
         .impact-card {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
             padding: 1.5rem;
             border-radius: 8px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,107,53,0.3);
         }
 
         .impact-icon {
@@ -193,7 +194,7 @@
         .impact-card h3 {
             font-size: 1.2rem;
             margin-bottom: 0.75rem;
-            color: #ffeb3b;
+            color: #ff8c42;
         }
 
         .impact-card p {
@@ -203,14 +204,15 @@
         }
 
         .alternatives {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,107,53,0.15);
             padding: 1.5rem;
             border-radius: 8px;
             margin: 2rem 0;
+            border: 1px solid rgba(255,107,53,0.3);
         }
 
         .alternatives h3 {
-            color: #ffeb3b;
+            color: #ff8c42;
             margin-bottom: 1rem;
             font-size: 1.3rem;
         }
@@ -232,25 +234,25 @@
             content: "✓";
             position: absolute;
             left: 0;
-            color: #ffeb3b;
+            color: #ff8c42;
             font-weight: bold;
             font-size: 1.2rem;
         }
 
         .alternatives strong {
-            color: #ffeb3b;
+            color: #ff8c42;
         }
 
         .challenge {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,107,53,0.2);
             padding: 1.5rem;
             border-radius: 8px;
-            border: 2px solid #ffd700;
+            border: 2px solid #ff6b35;
             margin: 2rem 0;
         }
 
         .challenge h3 {
-            color: #ffd700;
+            color: #ff8c42;
             margin-bottom: 1rem;
             font-size: 1.4rem;
         }
@@ -265,7 +267,7 @@
             font-size: 1.1rem;
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.3);
+            border-top: 1px solid rgba(255,107,53,0.3);
             font-style: italic;
         }
 
@@ -501,8 +503,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>During the FRC <span class="year">2026</span> Season, Liam Drank How Much??</h1>
-            <p class="subtitle">"THE most important statistics in FRC"</p>
+            <h1>During the <span class="year">2026</span> season, Liam Drank How Much??</h1>
+            <p class="subtitle">The most important statistics in FRC</p>
         </div>
 
         <div class="stats-section">
@@ -527,7 +529,7 @@
         </div>
 
         <div class="stats-section">
-            <h2>Consumption by Soda</h2>
+            <h2>Consumption by Type</h2>
             <table>
                 <thead>
                     <tr>
@@ -542,12 +544,12 @@
                         <td class="soda-name">Cherry Coke</td>
                         <td class="number-cell">2</td>
                         <td class="number-cell">84.0</td>
-                        <td class="number-cell">$0.10</td>
+                        <td class="number-cell">$0.20</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-<!-- 
+
         <div class="stats-section warning-section">
             <h2>⚠️ Hey Liam, Let's Talk About This...</h2>
             <div class="warning-content">
@@ -626,6 +628,6 @@
                 </p>
             </div>
         </div>
-    </div> -->
+    </div>
 </body>
 </html>
