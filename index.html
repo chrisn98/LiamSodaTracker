@@ -271,6 +271,42 @@
             font-style: italic;
         }
 
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .time-range-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #ff6b35;
+            background: white;
+            color: #ff6b35;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-range-btn:hover {
+            background: #fff5f0;
+            transform: translateY(-2px);
+        }
+
+        .time-range-btn.active {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border-color: #ff6b35;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 1rem 0.5rem;
@@ -381,6 +417,15 @@
             .footer-note {
                 font-size: 1rem;
             }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            .time-range-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -471,6 +516,15 @@
             .footer-note {
                 font-size: 0.9rem;
             }
+
+            .chart-container {
+                height: 250px;
+            }
+
+            .time-range-btn {
+                padding: 0.5rem 0.85rem;
+                font-size: 0.85rem;
+            }
         }
 
         @media (min-width: 1400px) {
@@ -503,8 +557,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>During the FRC <span class="year">2026</span> season, Liam Drank How Much??</h1>
-            <p class="subtitle">"THE most important statistics in FRC"</p>
+            <h1>During the <span class="year">2026</span> season, Liam Drank How Much??</h1>
+            <p class="subtitle">The most important statistics in FRC</p>
         </div>
 
         <div class="stats-section">
@@ -548,6 +602,18 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="stats-section">
+            <h2>Daily Consumption Trend</h2>
+            <div class="chart-container">
+                <canvas id="sodaChart"></canvas>
+            </div>
+            <div class="chart-controls">
+                <button class="time-range-btn active" data-range="week">Last 7 Days</button>
+                <button class="time-range-btn" data-range="month">Last 30 Days</button>
+                <button class="time-range-btn" data-range="season">Full Season</button>
+            </div>
         </div>
 
         <div class="stats-section warning-section">
@@ -629,5 +695,124 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Sample data for the chart - this will be replaced with real API data later
+        const chartData = {
+            week: {
+                labels: ['Jan 4', 'Jan 5', 'Jan 6', 'Jan 7', 'Jan 8', 'Jan 9', 'Jan 10'],
+                data: [0, 0, 0, 0, 0, 0, 2]
+            },
+            month: {
+                labels: ['Dec 12', 'Dec 15', 'Dec 18', 'Dec 21', 'Dec 24', 'Dec 27', 'Dec 30', 'Jan 2', 'Jan 5', 'Jan 8', 'Jan 10'],
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
+            },
+            season: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                data: [0, 0, 0, 0, 0, 0, 0, 2]
+            }
+        };
+
+        let currentChart = null;
+
+        function createChart(range) {
+            const ctx = document.getElementById('sodaChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (currentChart) {
+                currentChart.destroy();
+            }
+
+            const data = chartData[range];
+
+            currentChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Cans of Soda',
+                        data: data.data,
+                        borderColor: '#ff6b35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#ff6b35',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(44, 62, 80, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#ff6b35',
+                            borderWidth: 2,
+                            padding: 12,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y === 1 ? '1 can' : context.parsed.y + ' cans';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1,
+                                font: {
+                                    size: 12
+                                },
+                                color: '#666'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 12
+                                },
+                                color: '#666'
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize chart with week view
+        createChart('week');
+
+        // Add event listeners to buttons
+        document.querySelectorAll('.time-range-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.time-range-btn').forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Update chart
+                createChart(this.dataset.range);
+            });
+        });
+    </script>
 </body>
 </html>
