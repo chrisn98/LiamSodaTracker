@@ -566,17 +566,17 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <h3>Total Cans</h3>
-                    <div class="stat-value">2</div>
+                    <div class="stat-value">4</div>
                     <div class="stat-unit">cans consumed</div>
                 </div>
                 <div class="stat-card">
                     <h3>Total Sugar</h3>
-                    <div class="stat-value">84</div>
+                    <div class="stat-value">166</div>
                     <div class="stat-unit">grams</div>
                 </div>
                 <div class="stat-card">
                     <h3>Recycling Value</h3>
-                    <div class="stat-value">$0.20</div>
+                    <div class="stat-value">$0.40</div>
                     <div class="stat-unit">earned back</div>
                 </div>
             </div>
@@ -598,6 +598,12 @@
                         <td class="soda-name">Cherry Coke</td>
                         <td class="number-cell">2</td>
                         <td class="number-cell">84.0</td>
+                        <td class="number-cell">$0.20</td>
+                    </tr>
+                    <tr>
+                        <td class="soda-name">Coke</td>
+                        <td class="number-cell">2</td>
+                        <td class="number-cell">82.0</td>
                         <td class="number-cell">$0.20</td>
                     </tr>
                 </tbody>
@@ -701,16 +707,16 @@
         // Sample data for the chart - this will be replaced with real API data later
         const chartData = {
             week: {
-                labels: ['Jan 10'],
-                data: [2]
+                labels: ['Jan 10', 'Jan 11', 'Jan 12', 'Jan 13'],
+                data: [2, 0, 0, 2]
             },
             month: {
-                labels: ['Jan 10'],
-                data: [2]
+                labels: ['Jan 10', 'Jan 11', 'Jan 12', 'Jan 13'],
+                data: [2, 0, 0, 2]
             },
             season: {
                 labels: ['Week 1'],
-                data: [2]
+                data: [4]
             }
         };
 
